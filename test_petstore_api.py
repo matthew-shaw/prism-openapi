@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List, Union
 
 import pytest
 import requests
@@ -22,7 +22,9 @@ def pet_id() -> int:
     response: Response = requests.post(f"{BASE_URL}/pets", json=VALID_PET)
     assert response.status_code == 200
     data: Dict[str, object] = response.json()
-    return int(data.get("id", 1))
+    id_value = data.get("id", 1)
+    assert isinstance(id_value, int)
+    return id_value
 
 
 def test_get_all_pets() -> None:
@@ -47,7 +49,8 @@ def test_get_pets_with_query_params() -> None:
         - Response status code is 200.
         - Response body is a list.
     """
-    response: Response = requests.get(f"{BASE_URL}/pets", params={"tags": ["dog"], "limit": 5})
+    params: Dict[str, Union[str, int, List[str]]] = {"tags": ["dog"], "limit": 5}
+    response: requests.Response = requests.get(f"{BASE_URL}/pets", params=params)
     assert response.status_code == 200
     data: object = response.json()
     assert isinstance(data, list)
