@@ -1,2 +1,1 @@
-# prism-openapi
-Prism OpenAPI
+# Prism OpenAPI
