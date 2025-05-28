@@ -170,6 +170,13 @@ paths:
           schema:
             type: string
             format: uuid
+      requestBody:
+        description: User data to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
       responses:
         "200":
           description: User response
@@ -269,6 +276,8 @@ paths:
           schema:
             type: integer
             format: int32
+            minimum: 1
+            maximum: 1000
         - name: sort
           in: query
           description: Attribute to sort on
@@ -394,6 +403,13 @@ paths:
           schema:
             type: string
             format: uuid
+      requestBody:
+        description: Thing data to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ThingRequest"
       responses:
         "200":
           description: Thing response
@@ -513,6 +529,8 @@ components:
           type: integer
           format: int32
           example: 4
+          minimum: 1
+          maximum: 1000
     Thing:
       type: object
       properties:
@@ -539,6 +557,8 @@ components:
           type: integer
           format: int32
           example: 4
+          minimum: 1
+          maximum: 1000
         user_id:
           type: string
           format: uuid
@@ -578,6 +598,8 @@ components:
           type: integer
           format: int32
           example: 4
+          minimum: 1
+          maximum: 1000
     Token:
       type: object
       properties:
